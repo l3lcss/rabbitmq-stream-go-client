@@ -117,6 +117,15 @@ func NewEnvironment(options *EnvironmentOptions) (*Environment, error) {
 		locator:   newLocator(client),
 	}, connectionError
 }
+
+func (env *Environment) MaxProducersPerClient() int {
+	return env.producers.maxItemsForClient
+}
+
+func (env *Environment) MaxConsumersPerClient() int {
+	return env.consumers.maxItemsForClient
+}
+
 func (env *Environment) maybeReconnectLocator() error {
 	env.locator.mutex.Lock()
 	defer env.locator.mutex.Unlock()
