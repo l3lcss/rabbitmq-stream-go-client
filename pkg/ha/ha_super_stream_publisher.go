@@ -51,9 +51,9 @@ func NewReliableSuperStreamProducer(env *stream.Environment, superStream string,
 		return nil, fmt.Errorf("error creating super stream producer: %w", err)
 	}
 
-	ch := producer.NotifyPartitionClose(1)
+	ch := producer.NotifyPartitionClose(env.MaxProducersPerClient())
 	res.handleNotifyClose(ch)
-	chNotifyPublishConfirm := producer.NotifyPublishConfirmation(1)
+	chNotifyPublishConfirm := producer.NotifyPublishConfirmation(env.MaxProducersPerClient())
 	res.handlePublishConfirm(chNotifyPublishConfirm)
 	res.producer.Store(producer)
 	res.partitionConfirmMessageHandler = partitionConfirmMessageHandler

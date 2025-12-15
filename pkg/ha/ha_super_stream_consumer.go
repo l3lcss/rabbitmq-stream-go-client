@@ -54,7 +54,7 @@ func NewReliableSuperStreamConsumer(env *stream.Environment, superStream string,
 	if err != nil {
 		return nil, fmt.Errorf("error creating super stream consumer: %w", err)
 	}
-	ch := consumer.NotifyPartitionClose(1)
+	ch := consumer.NotifyPartitionClose(env.MaxConsumersPerClient())
 	res.handleNotifyClose(ch)
 	res.consumer.Store(consumer)
 	res.setStatus(StatusOpen)

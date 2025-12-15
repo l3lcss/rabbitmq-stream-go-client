@@ -76,7 +76,7 @@ func main() {
 				fmt.Printf("Partition %s reconnected.\n", partitionCloseEvent.Partition)
 			}
 		}
-	}(superStreamProducer.NotifyPartitionClose(1))
+	}(superStreamProducer.NotifyPartitionClose(3))
 
 	var confirmed int32
 	var failed int32
@@ -98,7 +98,7 @@ func main() {
 				}
 			}
 		}
-	}(superStreamProducer.NotifyPublishConfirmation(1))
+	}(superStreamProducer.NotifyPublishConfirmation(3))
 
 	// Publish messages
 loop:
